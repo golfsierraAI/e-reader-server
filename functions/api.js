@@ -20,14 +20,20 @@ const findCoverUrl = (item, data) => {
       i.public_id
         .toLowerCase()
         .includes(
-          item.public_id.slice(0, item.public_id.length - 5).toLowerCase()
+          item.public_id
+            .slice(
+              item.public_id.lastIndexOf("/") + 1,
+              item.public_id.length - 6
+            )
+            .toLowerCase()
         ) && i.resource_type !== "raw"
     );
-  }).secure_url;
+  })?.secure_url;
 };
 
 const processResponse = (data = []) => {
   let response = [];
+  console.log(data);
   for (let i = 0; i < data.length; i++) {
     const item = data.at(i);
     if (item.resource_type === "raw") {
