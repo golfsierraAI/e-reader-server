@@ -33,14 +33,13 @@ const findCoverUrl = (item, data) => {
 
 const processResponse = (data = []) => {
   let response = [];
-  console.log(data);
   for (let i = 0; i < data.length; i++) {
     const item = data.at(i);
     if (item.resource_type === "raw") {
       const obj = {
-        book_url: item.secure_url,
-        cover_url: findCoverUrl(item, data),
-        name: item.public_id.slice(
+        url: item.secure_url,
+        coverURL: findCoverUrl(item, data),
+        title: item.public_id.slice(
           item.public_id.lastIndexOf("/") + 1,
           item.public_id.length - 5
         ),
